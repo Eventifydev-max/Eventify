@@ -1,0 +1,88 @@
+{
+  "theme": "LIGHT",
+  "archetype": "1 (Organic & Earthy - Indian Wedding Variant)",
+  "vibe": "Auspicious, premium, grounded, and tactile. Moving away from generic flat SaaS into rich, culturally resonant UI without being garish. Deeply emotional and trustworthy.",
+  "colors": {
+    "background_primary": "#FAF9F6",
+    "background_secondary": "#F3EFE6",
+    "primary": "#B22222",
+    "primary_hover": "#8B1A1A",
+    "accent": "#D4AF37",
+    "text_primary": "#2C2A29",
+    "text_secondary": "#5C5855",
+    "border": "#EAE6D7",
+    "overlay_scrim": "rgba(0,0,0,0.4)"
+  },
+  "typography": {
+    "headings": {
+      "family": "'Cormorant Garamond', serif",
+      "weights": ["400", "600"],
+      "tracking": "tracking-tight",
+      "usage": "Use for Splash text, Main App Header, Category Titles. Never use Inter for this."
+    },
+    "body": {
+      "family": "'Outfit', sans-serif",
+      "weights": ["300", "400", "500"],
+      "tracking": "tracking-normal",
+      "usage": "Legible, modern contrast to the serif headings."
+    },
+    "imports": "@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Outfit:wght@300;400;500&display=swap');"
+  },
+  "layout_and_spacing": {
+    "mobile_strategy": "The entire app runs in a mobile layout. If deployed on web, restrict container to max-w-md mx-auto h-[100dvh] overflow-y-auto relative shadow-2xl bg-white. Hide scrollbars using custom css.",
+    "spacing_scale": "Use generous padding: p-6 or p-8 for sections. Avoid tight, cluttered margins.",
+    "cards": "Flat background (bg-white), 1px subtle border (border-[#EAE6D7]), rounded-2xl or rounded-xl. NO heavy drop shadows. Rely on border for definition.",
+    "bottom_nav": "Crystal Glassmorphism: backdrop-blur-xl bg-white/80 border-t border-[#EAE6D7]. Fixed to bottom. Icons must have high contrast active states (Crimson)."
+  },
+  "components": {
+    "hero_banner": "Image with gradient overlay `bg-gradient-to-t from-black/70 via-black/20 to-transparent` to ensure white text is readable. Text must be APCA compliant.",
+    "category_bento": "Asymmetric bento grid for categories. e.g. 'Gardens' spans full width (col-span-2), 'Pandits' and 'Video' split 50/50 below it (col-span-1 each) in a grid-cols-2 layout.",
+    "buttons": "Solid primary color for main CTA, no gradients. Deep crimson bg, white text. rounded-full or rounded-xl for mobile-friendly tap targets. min-h-[48px].",
+    "inputs": "Shadcn inputs but customized: bg-[#F3EFE6] border-none focus:ring-1 focus:ring-[#B22222].",
+    "calendar": "Shadcn Calendar for date picking, customized with crimson accent."
+  },
+  "animations": {
+    "transitions": "Use Framer Motion for page transitions (slide up/fade).",
+    "micro_interactions": "Hover or Tap states must scale down slightly (scale-95) and reduce opacity. Smooth ease-in-out."
+  },
+  "icons_and_assets": {
+    "icon_library": "lucide-react",
+    "images": [
+      {
+        "category": "hero_splash",
+        "url": "https://images.unsplash.com/photo-1722952934661-dde241aeb591?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwzfHxpbmRpYW4lMjB3ZWRkaW5nJTIwY291cGxlfGVufDB8fHx8MTc3Nzk3NjcyNnww&ixlib=rb-4.1.0&q=85",
+        "description": "Indian wedding couple - used for splash or home hero."
+      },
+      {
+        "category": "wedding_garden",
+        "url": "https://images.unsplash.com/photo-1767050248590-98007e69d969?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjByZXNvcnQlMjB3ZWRkaW5nJTIwZ2FyZGVufGVufDB8fHx8MTc3Nzk3NjcyNnww&ixlib=rb-4.1.0&q=85",
+        "description": "Luxury resort and manicured gardens for venue category."
+      },
+      {
+        "category": "mandap_pooja",
+        "url": "https://images.unsplash.com/photo-1759674889222-22ea8f9d33e2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjB3ZWRkaW5nJTIwbWFuZGFwJTIwZGVjb3JhdGlvbnxlbnwwfHx8fDE3Nzc5NzY3NDB8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Ganesha under colorful tent - used for Pandit/Pooja category."
+      },
+      {
+        "category": "videography",
+        "url": "https://images.pexels.com/photos/29261299/pexels-photo-29261299.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Videographer with camera for Photography/Videography category."
+      }
+    ]
+  },
+  "accessibility_and_testing": {
+    "contrast": "Text over images must use text-shadow or gradient scrims to meet 4.5:1 ratio.",
+    "testing_attributes": "All interactive elements MUST have `data-testid` in kebab-case (e.g., `data-testid=\"book-now-button\"`)."
+  },
+  "instructions_to_main_agent": [
+    "Build the app as a mobile-first responsive web app using Tailwind CSS.",
+    "Ensure the layout container mimics a mobile screen if viewed on desktop (max-w-md mx-auto, shadow-2xl, relative, overflow-x-hidden).",
+    "Use Shadcn UI primitives but strip away the default generic Vercel look. Apply the colors and border styles defined in these guidelines.",
+    "Inject the provided Google Fonts URL into index.css and extend tailwind.config.js to use them as 'heading' and 'sans'.",
+    "Implement a sticky bottom navigation bar with Glassmorphism for mobile app feel.",
+    "All tap targets (buttons, links, form inputs) must be at least 48px height for mobile usability.",
+    "For the booking flow, use Shadcn Calendar (customized to match the warm theme) and provide clear success states.",
+    "Include a 'Mock Payment' processing state with a spinner before showing the 'Booking Confirmed' screen.",
+    "Strictly follow the `data-testid` requirement for all buttons, inputs, and clickable cards."
+  ]
+}
