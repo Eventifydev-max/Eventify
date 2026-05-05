@@ -451,6 +451,11 @@ async def seed_data():
                 "created_at": datetime.now(timezone.utc).isoformat(),
             })
     await db.users.create_index([("phone", 1), ("role", 1)], unique=True)
+    # Defensive: drop legacy email index from previous schema if present
+    try:
+        await db.users.drop_index("email_1")
+    except Exception:
+        pass
 
 @app.on_event("startup")
 async def startup():
