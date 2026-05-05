@@ -1,0 +1,36 @@
+import React, { useEffect } from "react";
+import { Stack, useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { AuthProvider, useAuth } from "../src/lib/auth";
+
+function RootStack() {
+  return (
+    <Stack screenOptions={{ headerShown: false, animation: "slide_from_right" }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="role-select" />
+      <Stack.Screen name="phone" />
+      <Stack.Screen name="otp" />
+      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="(vendor)" />
+      <Stack.Screen name="service/[id]" />
+      <Stack.Screen name="booking/[serviceId]" />
+      <Stack.Screen name="payment/[bookingId]" />
+      <Stack.Screen name="confirmation/[bookingId]" />
+    </Stack>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <AuthProvider>
+          <StatusBar style="dark" />
+          <RootStack />
+        </AuthProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
+  );
+}

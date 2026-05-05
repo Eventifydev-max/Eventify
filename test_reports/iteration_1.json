@@ -1,0 +1,42 @@
+{
+  "summary": "Comprehensive backend + frontend testing of Shaadi Sewa OTP-auth wedding booking app. Backend: 35/35 pytest tests passed (100%) covering OTP send/verify, role-based auth, services CRUD, customer booking + payment + review flow, vendor listing CRUD, and RBAC enforcement. Frontend: Splash → role-select → phone (CUSTOMER LOGIN tag) → OTP screen with autofill button all render and navigate correctly. Post-verify navigation could not be visually confirmed end-to-end due to repeated Expo tunnel (ngrok) flaps to 502, but the verify-otp backend endpoint itself is fully functional.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "OTP verify → home navigation",
+        "issue": "Could not visually confirm navigation to /(tabs)/home after Verify & Continue in browser run because Expo preview kept returning 502 (ngrok tunnel flapping). Backend POST /api/auth/verify-otp confirmed working in pytest. Recommend main agent to manually re-test or rely on backend tests for this leg.",
+        "affected_testIDs": ["verify-otp-button"]
+      }
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_shaadi_api.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Infrastructure (NOT code): Expo `ngrok` tunnel keeps disconnecting with 'ngrok tunnel took too long to connect' / 'endpoint already online ERR_NGROK_334'. Causes 502 on the public preview URL for 1-3 minutes at a time. Main agent / ops should investigate ngrok auth-token / tunnel pooling. This intermittently blocks UI automation but the app itself is healthy when tunnel is up.",
+    "Note (legacy): MongoDB still had a stale unique index `email_1` from a previous schema that initially crashed seed_data with DuplicateKeyError. Index was already dropped by the time tests ran (only `_id_` and `phone_1_role_1` remain) so seed now succeeds, but main agent should add a defensive `db.users.drop_index('email_1')` (try/except) or a startup migration to make seed idempotent across redeploys.",
+    "Optional: add testID props to splash 'Get Started' button, role cards, phone-input, send-otp-button, otp-autofill-button, verify-otp-button, and tab buttons for more reliable automated UI testing."
+  ],
+  "critical_code_review_comments": [
+    "server.py:138 returns demo_otp in the API response — this is intentional for the demo (already labelled MOCKED), but must be removed before any production deployment.",
+    "server.py:453 creates the unique index on every startup. Fine for now, but combined with the legacy `email_1` index the seed could fail on existing dirty DBs. Consider a one-shot migration that drops obsolete indexes before creating the new ones.",
+    "server.py is a single 475-line file mixing models, routes, and seed data. Acceptable for current scope; if it grows, split into routers/, models/, seed/."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_shaadi_api.py (rewrote from old email/password schema to OTP schema, 35 tests)"
+  ],
+  "success_rate": {"backend": "100% (35/35)", "frontend": "~85% (splash, role-select, phone, OTP screens verified visually; home/booking screens verified via API only due to tunnel 502)"},
+  "seed_data_creation": "No new seed data created. Used existing seeded customers (9999900001, 9999900002), seeded vendor (9999900003), and dynamically generated TEST_-prefixed users/listings for vendor & new-signup tests (auto-cleaned by test scope; vendor's TEST listing is explicitly DELETEd in test_vendor_delete_own_listing).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend is rock solid. To test UI end-to-end you MUST first verify the public preview URL returns HTTP 200 (not 502); the ngrok tunnel is flaky and can take 1-3 supervisor restart cycles to come up. Use `for i in {1..10}; do sleep 25; curl -s -o /dev/null -w '%{http_code}\\n' https://shaadi-booking-hub.preview.emergentagent.com/; done` until 200. Once UP, the flow is: Get Started → Plan My Wedding → fill phone (e.g. 9999900001) → Send OTP → 'Tap to autofill' → 'Verify & Continue'. Use exact text 'Verify & Continue' (not just 'Verify' which also matches the screen title 'Verify your number').",
+  "rca_of_issue": "Two infra-level findings: (1) Stale `email_1` unique index from old schema caused initial seed_data DuplicateKeyError on `email: null` — already dropped by manual cleanup, but should be guarded by a defensive drop in startup. (2) Expo `ngrok` tunnel has been flapping (ERR_NGROK_334 'endpoint already online' and 'tunnel took too long to connect'), causing intermittent 502 on the public preview URL. This is an infrastructure / ngrok-account concurrency issue, not an app bug."
+}
