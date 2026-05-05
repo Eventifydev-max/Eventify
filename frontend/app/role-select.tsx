@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, ScrollView, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
@@ -18,8 +18,11 @@ export default function RoleSelect() {
         <TouchableOpacity testID="back-btn" onPress={() => router.back()} style={styles.back}>
           <Ionicons name="chevron-back" size={26} color={colors.text} />
         </TouchableOpacity>
-        <Text style={styles.brand}>SHAADI SEWA</Text>
-        <Text style={styles.title}>How will you{"\n"}use Shaadi Sewa?</Text>
+        <View style={styles.brandRow}>
+          <Image source={require("../assets/images/eventify-logo.png")} style={styles.logo} />
+          <Text style={styles.brand}>EVENTIFY</Text>
+        </View>
+        <Text style={styles.title}>How will you{"\n"}use Eventify?</Text>
         <Text style={styles.sub}>Choose your role to continue</Text>
 
         <TouchableOpacity testID="role-customer" style={styles.cardWrap} activeOpacity={0.85} onPress={() => go("customer")}>
@@ -33,7 +36,7 @@ export default function RoleSelect() {
                 <Ionicons name="heart" size={20} color="#fff" />
               </View>
               <View style={{ flex: 1 }} />
-              <Text style={styles.cardLabel}>Plan My Wedding</Text>
+              <Text style={styles.cardLabel}>Plan My Event</Text>
               <Text style={styles.cardDesc}>Browse venues, pandits & videographers. Book in minutes.</Text>
               <View style={styles.cardCta}>
                 <Text style={styles.cardCtaText}>Continue as Customer</Text>

@@ -1,15 +1,15 @@
 export const colors = {
-  bg: "#FAF9F6",
-  bgSoft: "#F3EFE6",
-  primary: "#B22222",
-  primaryDark: "#8B1A1A",
-  accent: "#D4AF37",
-  text: "#2C2A29",
-  textMuted: "#5C5855",
-  border: "#EAE6D7",
+  bg: "#FAFAFA",
+  bgSoft: "#F4F0FA",
+  primary: "#9333EA",
+  primaryDark: "#7C3AED",
+  accent: "#EC4899",
+  text: "#1F1A2E",
+  textMuted: "#6B6480",
+  border: "#EAE4F2",
   white: "#FFFFFF",
   scrim: "rgba(0,0,0,0.4)",
-  success: "#2E7D32",
+  success: "#16A34A",
 };
 
 export const radius = { sm: 8, md: 12, lg: 16, xl: 20, full: 999 };

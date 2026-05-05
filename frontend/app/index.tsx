@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ActivityIndicator, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useAuth } from "../src/lib/auth";
@@ -30,14 +30,13 @@ export default function Splash() {
       style={styles.bg}
       testID="splash-bg"
     >
-      <LinearGradient colors={["rgba(0,0,0,0.1)", "rgba(0,0,0,0.55)", "rgba(0,0,0,0.92)"]} style={StyleSheet.absoluteFill} />
+      <LinearGradient colors={["rgba(20,10,40,0.2)", "rgba(20,10,40,0.65)", "rgba(20,10,40,0.95)"]} style={StyleSheet.absoluteFill} />
       <View style={styles.content}>
         <View style={styles.brandRow}>
-          <View style={styles.dot} />
-          <Text style={styles.brand}>SHAADI SEWA</Text>
-          <View style={styles.dot} />
+          <Image source={require("../assets/images/eventify-logo.png")} style={styles.logo} />
+          <Text style={styles.brand}>EVENTIFY</Text>
         </View>
-        <Text style={styles.title}>Your Perfect{"\n"}Wedding Awaits</Text>
+        <Text style={styles.title}>Your Perfect{"\n"}Event Awaits</Text>
         <Text style={styles.subtitle}>
           Discover venues, pandits & cinematographers — or list your business and earn.
         </Text>
@@ -58,9 +57,10 @@ const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center", justifyContent: "center" },
   bg: { flex: 1, justifyContent: "flex-end" },
   content: { padding: 28, paddingBottom: 56 },
-  brandRow: { flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 16 },
+  brandRow: { flexDirection: "row", alignItems: "center", gap: 12, marginBottom: 16 },
+  logo: { width: 48, height: 48, borderRadius: 12 },
   dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: colors.accent },
-  brand: { color: colors.accent, letterSpacing: 4, fontSize: 12, fontWeight: "600" },
+  brand: { color: "#fff", letterSpacing: 5, fontSize: 20, fontWeight: "700" },
   title: { color: "#fff", fontSize: 44, lineHeight: 50, fontWeight: "400", fontFamily: "serif", marginBottom: 14 },
   subtitle: { color: "rgba(255,255,255,0.85)", fontSize: 15, lineHeight: 22, marginBottom: 32 },
   cta: { backgroundColor: colors.primary, height: 56, borderRadius: 16, alignItems: "center", justifyContent: "center" },

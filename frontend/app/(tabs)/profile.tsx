@@ -46,7 +46,7 @@ export default function Profile() {
           <Text style={styles.logoutText}>Sign Out</Text>
         </TouchableOpacity>
 
-        <Text style={styles.brand}>SHAADI SEWA · v1.0</Text>
+        <Text style={styles.brand}>EVENTIFY · v1.0</Text>
       </ScrollView>
     </SafeAreaView>
   );

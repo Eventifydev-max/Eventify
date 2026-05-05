@@ -54,7 +54,7 @@ export default function VendorProfile() {
           <Text style={styles.logoutText}>Sign Out</Text>
         </TouchableOpacity>
 
-        <Text style={styles.brand}>SHAADI SEWA · VENDOR · v1.0</Text>
+        <Text style={styles.brand}>EVENTIFY · VENDOR · v1.0</Text>
       </ScrollView>
     </SafeAreaView>
   );

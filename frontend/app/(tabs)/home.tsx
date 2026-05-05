@@ -55,8 +55,8 @@ export default function Home() {
           imageStyle={{ borderRadius: 20 }}
         >
           <LinearGradient colors={["transparent", "rgba(0,0,0,0.78)"]} style={styles.heroGrad}>
-            <Text style={styles.heroBrand}>SHAADI SEWA</Text>
-            <Text style={styles.heroTitle}>Plan your{"\n"}fairytale wedding</Text>
+            <Text style={styles.heroBrand}>EVENTIFY</Text>
+            <Text style={styles.heroTitle}>Plan your{"\n"}perfect event</Text>
             <TouchableOpacity testID="hero-explore-btn" style={styles.heroBtn} onPress={() => router.push("/(tabs)/search")}>
               <Text style={styles.heroBtnText}>Explore Services</Text>
               <Ionicons name="arrow-forward" size={16} color="#fff" />

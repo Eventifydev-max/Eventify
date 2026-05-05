@@ -372,7 +372,7 @@ async def get_reviews(service_id: str):
 # ========== Health ==========
 @api_router.get("/")
 async def root():
-    return {"message": "Shaadi Sewa API", "status": "ok"}
+    return {"message": "Eventify API", "status": "ok"}
 
 # ========== Seed Data ==========
 SEED_SERVICES = [
