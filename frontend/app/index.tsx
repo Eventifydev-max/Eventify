@@ -33,7 +33,7 @@ export default function Splash() {
       <LinearGradient colors={["rgba(20,10,40,0.2)", "rgba(20,10,40,0.65)", "rgba(20,10,40,0.95)"]} style={StyleSheet.absoluteFill} />
       <View style={styles.content}>
         <View style={styles.brandRow}>
-          <Image source={require("../assets/images/eventify-logo.png")} style={styles.logo} />
+          <Image source={require("../assets/images/eventify-logo.png")} style={{ width: 48, height: 48, borderRadius: 12 }} resizeMode="contain" width={48} height={48} />
           <Text style={styles.brand}>EVENTIFY</Text>
         </View>
         <Text style={styles.title}>Your Perfect{"\n"}Event Awaits</Text>
